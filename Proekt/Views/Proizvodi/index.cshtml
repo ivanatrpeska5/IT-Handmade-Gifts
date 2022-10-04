@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Proekt.Models.Proizvodi>
+@{
+    ViewBag.Title = "Производи";
+}
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-info" style="background-color: grey; height:30px;">
+                            <p class="card-text">
+                                <div class="card-title" style="text-decoration:none; color=white; font-size:20px; padding:5px;">
+                                    @item.Name
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div style="text-decoration:none; color:white;float:right;border:0.3px solid black;font-size:9px;background:white; padding:0.5px;">
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        </div>
+                                       
+                                        <div style="text-decoration:none; color:white;float:right;border:0.3px solid black;font-size:9px;background:white; padding:0.5px;">
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </div>
+
+                                    }
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="@item.ImageURL" width="100%" alt="@item.Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">@item.Description</p>                     
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                               
+                                @Html.ActionLink("Нарачај", "Create",
+                                "Orders", new {id = item.Id}, null)
+                                <!--  <a class="btn btn-success text-white"
+         asp-controller="OrdersController"
+         asp-action="CreateOrder"
+         asp-route-id="@item.Id">
+          <i class="bi bi-cart-plus"></i> Нарачај  (@item.Price.ToString()ден).
+      </a> -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

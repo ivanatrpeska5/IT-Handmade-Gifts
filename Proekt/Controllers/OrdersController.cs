@@ -37,6 +37,7 @@ namespace Proekt.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Id = new SelectList(db.proizvodi, "Id", "Name");

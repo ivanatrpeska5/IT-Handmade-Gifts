@@ -2,67 +2,91 @@
 @{
     ViewBag.Title = "Производи";
 }
-<p>
+<style>
+    .misho {
+        color: white;
+        font-size: 20px;
+        background-color: #85816b;
+        border-radius: 15px;
+        z-index: 2000;
+        position: absolute;
+        left: 1400px;
+        height: 50px;
+        width: 50px;
+        /* align-content: center; */
+        /* align-items: center; */
+        top: 70px;
+        /* justify-content: center; */
+        padding: 13px;
+    }
+    .misho:hover{
+        color:green;
+    }
+</style>
+
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Create New", "Create")
+       <!-- @Html.ActionLink("+", "Create")-->
+        <a href="@Url.Action("Create", "Proizvodi")" class="misho">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+
     }
-</p>
+
 
 <div class="row">
     @foreach (var item in Model)
-    {
+    { 
         <div class="col-md-4 col-xs-6 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
+            <div class="card mb-3" style=" max-width: 540px; background: #f7f1ec; border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; heighy:300px;">
+                <div class="row g-0" style=" margin-top: 20px;">
                     <div class="col-md-12">
-                        <div class="card-header text-white bg-info" style="background-color: grey; height:30px;">
+                        <div class="card-header text-white" style=" height: 50px; font-size: 20px; align-items: center; background: #413f35; color: white; justify-content: center; padding: 1px;">
                             <p class="card-text">
-                                <div class="card-title" style="text-decoration:none; color=white; font-size:20px; padding:5px;">
+                                <div class="card-title" style="margin-left: 10px; margin-right: 10px;">
                                     @item.Name
                                     @if (User.IsInRole("Admin"))
-                                    {
-                                        <div style="text-decoration:none; color:white;float:right;border:0.3px solid black;font-size:9px;background:white; padding:0.5px;">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                                        </div>
-                                       
-                                        <div style="text-decoration:none; color:white;float:right;border:0.3px solid black;font-size:9px;background:white; padding:0.5px;">
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                        </div>
-
+                                    {                                       
+                                            <a href="@Url.Action("Edit", "Proizvodi",new { id = item.Id })">
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"style="float:right;color:white;margin-right:10px;"></span>
+                                            </a>
+                           
+                                            <a href="@Url.Action("Delete", "Proizvodi",new { id = item.Id })">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"style="float:right;color:white;"></span>
+                                            </a>
                                     }
                                 </div>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="@item.ImageURL" width="100%" alt="@item.Name">
+                        <img src="@item.ImageURL" width="100%" alt="@item.Name" style="max-height:200px; min-height:200px;">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text">@item.Description</p>                     
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" style=" padding-left: 41px;">
                         <div class="card-footer ">
                             <p class="card-text">
-                                @Html.ActionLink("Details", "Details", new { id = item.Id })
-                               
-                                @Html.ActionLink("Нарачај", "Create",
-                                "Orders", new {id = item.Id}, null)
-                                <!--  <a class="btn btn-success text-white"
-         asp-controller="OrdersController"
-         asp-action="CreateOrder"
-         asp-route-id="@item.Id">
-          <i class="bi bi-cart-plus"></i> Нарачај  (@item.Price.ToString()ден).
-      </a> -->
+
+                                <a class="btn btn-outline-primary float-right" href="@Url.Action("Details", "Proizvodi",new { id = item.Id })" style=" border: 1px solid black; color: green;">
+                                    <i class="bi bi-eye-fill"></i> Детали
+                                </a>
+
+                                <a class="btn btn-success text-white "
+                                   href="@Url.Action("Create", "Orders",new { id = item.Id })">
+                                    <span class="btn btn-outline-primary glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Нарачај (Цена @item.Price.ToString()ден.)
+                                </a>
+
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    }
+     } 
 </div>
 
 

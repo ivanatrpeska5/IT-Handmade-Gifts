@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Детали</h2>
 
 <div class="row">
     <div class="col-md-8 offset-2">
@@ -13,9 +13,9 @@
                 <div class="col-md-12">
                     <div class="card-header text-white bg-info">
                         <p class="card-text">
-                            <h5 class="card-title">
+                            <div class="card-title" style=" height: 50px; font-size: 20px; align-items: center; background: #413f35; color: white; justify-content: center; padding: 1px;">
                                 @Model.Name
-                            </h5>
+                            </div>
                         </p>
                     </div>
                 </div>
@@ -29,14 +29,10 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card-footer">
-                        <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="Index">
-                                Back to List
+                            @Html.ActionLink("Back to List", "Index")
+                            <a class="btn btn-success text-white "href="@Url.Action("Create", "Orders",new { id = @Model.Id })">
+                            <span class="btn btn-outline-primary glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Нарачај (Цена @Model.Price.ToString()ден.)
                             </a>
-                            <a class="btn btn-success text-white 
-                               asp-controller="Orders"
-                               asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))</a>
-                        </p>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ namespace Proekt.Models
         public int OrderId { get; set; }
 
         public int Id { get; set; }
-        [ForeignKey(nameof(Id))]
+        [ForeignKey(nameof(Id))]      
         public Proizvodi Proizvodi { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
